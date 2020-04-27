@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Speedex Courier</title>
+<link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="all">
+<link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'css/fontawesome-all.min.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'images/logo.png' %}" rel="icon"/>
+<style>
+.container-fluid
+{
+min-height:1050px;
+height:auto;
+width:100%;
+}
+#slider
+{
+min-height:1000px;
+height:auto;
+background-image:url('{% static 'images/pic666.jpg' %}');
+}
+#sliderin
+{
+min-height:1000px;
+height:auto;
+padding:20px;
+}
+#menuouter
+{
+height:80px;
+width:100%;
+}
+#menu
+{
+height:80px;
+width:85%;
+border-radius:8px;
+}
+#menu ul
+{
+list-style-type:none;
+padding-top:30px;
+}
+#menu ul li
+{
+display:inline;
+border:1px solid rgba(0,0,0,0);
+border-radius:6px;
+padding:15px;
+font-weight:bold;
+margin-left:47px;
+}
+#menu ul li:hover
+{
+border:1px solid rgba(0,0,0,0.3);
+}
+#menu ul li a
+{
+font-size:17px;
+color:black;
+text-shadow:1px 1px rgba(0,0,0,0.1);
+text-decoration:none;
+}
+#menu ul li a:hover
+{
+color:rgba(0,0,0,0.3);
+text-shadow:0px 0px;
+text-decoration:none;
+}
+#footer
+{
+height:50px;
+background-color:#212121;
+color:white;
+}
+#lfooter
+{
+height:50px;
+width:800px;
+float:left;
+padding-top:5px;
+text-align:center;
+}
+#rfooter
+{
+height:50px;
+width:599px;
+float:right;
+padding-top:5px;
+}
+td input
+{
+background-color:rgba(0,0,0,0);
+border:1px solid white;
+color:white;
+}
+td textarea
+{
+background-color:rgba(0,0,0,0);
+border:1px solid;
+color:white;
+}
+tr
+{
+text-align:center;
+}
+</style>
+</head>
+<body >
+<div class="container-fluid">
+<div class="row" id="slider">
+<div class="col-12" id="sliderin">
+<br/>
+<div id="menuouter">
+<div class="media" style="float:left;">
+<img src="{% static 'images/logo.png' %}"style="margin-left:20px;height:70px;width:70px;margin-top:5px;"/>
+<div class="media-text" style="padding-left:20px;"><span style="font-family:Forte;font-size:25px;text-decoration:underline;text-shadow:1px 1px #bdc5cc;">SPEEDEX<br/>COURIER</span></div>
+</div>
+<div id="menu" style="float:right;">
+ <ul>
+  <li><a href="{% url 'adminzone:adminhome' %}">ADMIN HOME</a></li>
+  <li><a href="{% url 'adminzone:enquiries' %}">ENQUIRIES</a></li>
+  <li><a href="{% url 'adminzone:complains' %}">COMPLAINS</a></li>
+  <li><a href="{% url 'adminzone:consignment' %}">CONSIGNMENT</a></li>
+     <li><a href="{% url 'adminzone:jobseekers' %}">JOB SEEKERS</a></li>
+  <li><a href="{% url 'adminzone:logout' %}">LOGOUT</a></li>
+ </ul>
+ </div>
+</div>
+    <br/>
+<div class="col-12 text-center"><p class="display-3" style="font-family:Forte;text-shadow:4px 4px rgba(0,0,0,0.4);">MANAGE ENQUIRIES<br/></p></div>
+    <br/><br/>
+<div class="col-11" style="background-color:rgba(0,0,0,0.3);margin:0 auto;">
+
+    <table style="width:100%;margin:0 auto;color:white;font-size:20px;" cellpadding="20px">
+        <tr class="h4" style="font-family:Forte;text-shadow:1px 1px rgba(0,0,0,0.3)">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th colspan="2">Address</th>
+            <th>Contact No</th>
+            <th>Email Address</th>
+            <th>Enquiry</th>
+            <th>Date</th>
+            <th>Delete</th>
+        </tr>
+        {% for e in enq %}
+        <tr>
+            <td>{{e.id}}</td>
+            <td>{{e.name}}</td>
+            <td>{{e.gender}}</td>
+            <td colspan="2">{{e.address}}</td>
+            <td>{{e.contactno}}</td>
+            <td>{{e.emailaddress}}</td>
+            <td>{{e.enquirytext}}</td>
+            <td>{{e.enquirydate}}</td>
+            <td><a style="color:white;" href="{% url 'adminzone:deleteenquiries' e.id %}">Delete</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+<br/>
+</div>
+
+<br/>
+</div>
+</div>
+<div class="row" id="footer">
+<div id="lfooter"><h4>Copyright &copy; to Speedex</h4></div>
+<div id="rfooter"><h4>Developed by:-Samriddhi Mishra</h4></div>
+</div>
+</div>
+</body>
+</html>

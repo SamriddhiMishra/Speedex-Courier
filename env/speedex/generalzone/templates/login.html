@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Speedex Courier/Login</title>
+<link href="static/css/bootstrap.css" type="text/css" rel="stylesheet"/>
+<link href="static/css/style.css" type="text/css" rel="stylesheet" media="all">
+<link href="static/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+<link href="static/css/fontawesome-all.min.css" type="text/css" rel="stylesheet"/>
+<link href="static/images/logo.png" rel="icon"/>
+<style>
+#slider
+{
+min-height:760px;
+background-image:url({% static 'images/pic55.jpg' %});
+}
+#sliderin
+{
+width:100%;
+min-height:760px;
+}
+.footer
+{
+min-height: 35px;
+background-color:#212121;
+color:white;
+vertical-align:center;
+padding-top:2px;
+}
+td input
+{
+background-color:rgba(0,0,0,0);
+border:1px solid white;
+color:white;
+}
+td textarea
+{
+background-color:rgba(0,0,0,0);
+border:1px solid;
+color:white;
+}
+tr
+{
+text-align:center;
+}
+.top-display-text{
+color:white;
+font-family:Forte;
+text-shadow:4px 4px rgba(255,255,255,0.4);
+font-size:8 rem;
+}
+#menuouter
+{
+min-height:100px;
+width:100%;
+}
+#menu
+{
+border-radius:8px;
+width:80%;
+float:right;
+}
+#menu ul
+{
+list-style-type:none;
+padding-top:30px;
+}
+#menu ul li
+{
+display:inline;
+border:1px solid rgba(0,0,0,0);
+border-radius:6px;
+font-weight:bold;
+margin:10px;
+padding: 5px;
+}
+#menu ul li:hover
+{
+border:1px solid #dee1e6;
+}
+#menu ul li a
+{
+color:black;
+text-shadow:1px 1px rgba(255,255,255,0.6);
+text-decoration:none;
+}
+#menu ul li a:hover
+{
+color:white;
+text-shadow:0px 0px;
+text-decoration:none;
+}
+.menu-toggle{
+float:right;
+cursor: pointer;
+display:none;
+}
+@media (max-width:1300px)
+{
+.menu-toggle{
+display:block;
+margin:35px;
+font-size: 25px;
+float:right;
+}
+#menu{
+width:100%;
+height:calc(100vh-50px);
+background-color:rgba(0,0,0,0.5);
+top:110px;
+transition: 0.5s;
+left:-100%;
+}
+#menu.active{
+display:none;
+}
+#menu ul
+{
+width:100%;
+text-align:center;
+display:block;
+padding:0;
+}
+#menu ul li
+{
+width:100%;
+display:block;
+margin:10px 0 10px 0;
+padding:10px 0 10px 0;
+border-bottom: 1px solid #ffffff;
+}
+#menu ul li a
+{
+color: #ffffff;
+}
+#menu ul li:hover
+{
+border:0;
+}
+.footer
+{
+margin-top:20px;
+}
+}
+</style>
+</head>
+<body >
+<div class="container-fluid">
+<div class="row" id="slider">
+<div id="sliderin">
+
+<div id="menuouter">
+<div class="media" style="width:20%;float:left;padding:20px 0 0 20px;">
+<img src="{% static 'images/logo.png' %}"style="margin-left:20px;height:70px;width:70px;margin-top:5px;"/>
+<div class="media-text" style="padding-left:30px;"><span style="font-family:Forte;font-size:25px;text-decoration:underline;color:white;">SPEEDEX<br/>COURIER</span></div>
+</div>
+ <div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+<nav id="menu">
+ <ul>
+     <li><a href="{% url 'index' %}">HOME</a></li>
+  <li><a href="{% url 'about' %}">ABOUT US</a></li>
+  <li><a href="{% url 'login' %}">LOGIN</a></li>
+  <li><a href="{% url 'tracking' %}">PACKET TRACKING</a></li>
+  <li><a href="{% url 'complain' %}">COMPLAIN</a></li>
+  <li><a href="{% url 'enquiry' %}">ENQUIRY</a></li>
+  <li><a href="{% url 'career' %}">CARRER</a></li>
+ </ul>
+ </nav>
+</div>
+
+    <span><br/></span>
+    <!--<div class="col-7" style="height:50px;margin:0 auto;">
+        <marquee  width="100%" onmouseover="stop()" onmouseout="start()" >
+          <span style="text-align:center;">
+            {% for n in nf%}
+        <span class="h3" style="color:black;font-family:Forte;text-shadow:2px 2px rgba(0,0,0,0.3);">{{n.notificationtext}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+          </span>
+        </marquee>
+    </div>-->
+
+<div class="text-center"><p class="display-3" style="font-family:Forte;text-shadow:4px 4px rgba(0,0,0,0.4);">LOGIN<br/></p></div>
+<br/>    <br/>
+<div class="col-7" style="background-color:rgba(0,0,0,0.3);margin:0 auto;">
+
+    <form action="{% url 'validateuser' %}" method="post">
+        {% csrf_token %}
+        <table style="width:80%;margin:0 auto;color:white;font-size:20px;" cellpadding="30px" >
+                 <tr>
+                <td>User ID:-</td>
+                <td><input type="text" name="userid" required/></td>
+            </tr>
+            <tr>
+                <td>Password:-</td>
+                <td><input type="password" name = "password" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Log In" style="width:100px;"/></td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+</div>
+</div>
+<div class="row">
+<div class="footer col-md-6 col-12"><h4>Copyright &copy; to Speedex</h4></div>
+<div class="footer col-md-6 col-12"><h4>Developed by:-Samriddhi Mishra</h4></div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('.menu-toggle').click(function(){
+        $('nav').toggleClass('active')
+    })
+    })
+</script>
+</body>
+</html>

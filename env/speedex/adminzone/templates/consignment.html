@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Speedex Courier</title>
+<link href="{% static 'css/bootstrap.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="all">
+<link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'css/fontawesome-all.min.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'images/logo.png' %}" rel="icon"/>
+<style>
+.container-fluid
+{
+min-height:1050px;
+height:auto;
+width:100%;
+}
+#slider
+{
+min-height:1000px;
+height:auto;
+background-image:url('{% static 'images/pic666.jpg' %}');
+}
+#sliderin
+{
+min-height:1000px;
+height:auto;
+padding:20px;
+}
+#menuouter
+{
+height:80px;
+width:100%;
+}
+#menu
+{
+height:80px;
+width:85%;
+border-radius:8px;
+}
+#menu ul
+{
+list-style-type:none;
+padding-top:30px;
+}
+#menu ul li
+{
+display:inline;
+border:1px solid rgba(0,0,0,0);
+border-radius:6px;
+padding:15px;
+font-weight:bold;
+margin-left:47px;
+}
+#menu ul li:hover
+{
+border:1px solid rgba(0,0,0,0.3);
+}
+#menu ul li a
+{
+font-size:17px;
+color:black;
+text-shadow:1px 1px rgba(0,0,0,0.1);
+text-decoration:none;
+}
+#menu ul li a:hover
+{
+color:rgba(0,0,0,0.3);
+text-shadow:0px 0px;
+text-decoration:none;
+}
+#footer
+{
+height:50px;
+background-color:#212121;
+color:white;
+}
+#lfooter
+{
+height:50px;
+width:800px;
+float:left;
+padding-top:5px;
+text-align:center;
+}
+#rfooter
+{
+height:50px;
+width:599px;
+float:right;
+padding-top:5px;
+}
+td input
+{
+background-color:rgba(0,0,0,0);
+border:1px solid white;
+color:white;
+}
+td textarea
+{
+background-color:rgba(0,0,0,0);
+border:1px solid;
+color:white;
+}
+tr
+{
+text-align:center;
+}
+</style>
+</head>
+<body >
+<div class="container-fluid">
+<div class="row" id="slider">
+<div class="col-12" id="sliderin" style="text-align:center;">
+<br/>
+<div id="menuouter">
+<div class="media" style="float:left;">
+<img src="{% static 'images/logo.png' %}"style="margin-left:20px;height:70px;width:70px;margin-top:5px;"/>
+<div class="media-text" style="padding-left:20px;"><span style="font-family:Forte;font-size:25px;text-decoration:underline;text-shadow:1px 1px #bdc5cc;">SPEEDEX<br/>COURIER</span></div>
+</div>
+<div id="menu" style="float:right;">
+ <ul>
+  <li><a href="{% url 'adminzone:adminhome' %}">ADMIN HOME</a></li>
+  <li><a href="{% url 'adminzone:enquiries' %}">ENQUIRIES</a></li>
+  <li><a href="{% url 'adminzone:complains' %}">COMPLAINS</a></li>
+  <li><a href="{% url 'adminzone:consignment' %}">CONSIGNMENT</a></li>
+     <li><a href="{% url 'adminzone:jobseekers' %}">JOB SEEKERS</a></li>
+  <li><a href="{% url 'adminzone:logout' %}">LOGOUT</a></li>
+ </ul>
+ </div>
+</div>
+    <br/>
+<div class="col-12 text-center"><p class="display-3" style="font-family:Forte;text-shadow:4px 4px rgba(0,0,0,0.4);">ADD CONSIGNMENT</p></div>
+    <br/><br/>
+<div class="col-9" style="background-color:rgba(0,0,0,0.3);margin:0 auto;">
+    <form action="{% url 'adminzone:saveconsignment' %}" method="post">
+        {% csrf_token %}
+        <table style="width:80%;margin:0 auto;color:white;font-size:20px;" cellpadding="30px">
+                    <tr>
+                    <td>Enter Reference Number:-</td>
+                    <td><input type="text" name="refno" required/></td>
+                </tr>
+                <tr>
+                    <td>Enter Sender name:-</td>
+                    <td><input type="text" name="sendername" required/></td>
+                </tr>
+                <tr>
+                    <td>Enter Sender Address:-</td>
+                    <td><textarea name="senderaddress" required style="resize:none; height:100px;"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Enter Sender Contact No:-</td>
+                    <td><input type="text" name="sendercontactno" required/></td>
+                </tr>
+                <tr>
+                    <td>Enter Receiver name:-</td>
+                    <td><input type="text" name="receivername" required/></td>
+                </tr>
+                <tr>
+                    <td>Enter Receiver Address:-</td>
+                    <td><textarea name="receiveraddress" required style="resize:none; height:100px;"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Select Source City:-</td>
+                    <td><select name="source">
+                        {% for c in city %}
+                        <option>{{c.cityname}}</option>
+                        {% endfor %}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Select Current City:-</td>
+                    <td><select name="currentcity">
+                        {% for c in city %}
+                        <option>{{c.cityname}}</option>
+                        {% endfor %}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Select Destination:-</td>
+                    <td><select name="destination">
+                        {% for c in city %}
+                        <option>{{c.cityname}}</option>
+                        {% endfor %}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Select status:-</td>
+                    <td >
+                        <select name="status">
+                           <option>Initiated</option>
+                           <option>Pipeline</option>
+                           <option>Delivered</option>
+                           <option>Cancelled</option>
+                        </select>
+                    </td>
+
+                <tr>
+                    <td colspan="2" ><input style="width:150px;" type="submit" value="Submit"/></td>
+                </tr>
+
+            </table>
+    </form>
+<br/>
+</div>
+
+<br/>
+<br/>
+<br/>
+     {% if msg %}
+    <p class="h3" style="color:black;font-family:Forte;text-shadow:2px 2px rgba(255,255,255);">{{msg}}</p>
+    {% endif %}
+<br/>
+<br/>
+<br/>
+</div>
+</div>
+<div class="row" id="footer">
+<div id="lfooter"><h4>Copyright &copy; to Speedex</h4></div>
+<div id="rfooter"><h4>Developed by:-Samriddhi Mishra</h4></div>
+</div>
+</div>
+</body>
+</html>
